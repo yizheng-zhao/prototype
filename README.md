@@ -1,6 +1,5 @@
 # Thanks for your interest in OntoLDiff.
-
-# We provide an executable jar file, namely, LDiff.jar. 
+We provide an executable jar file, namely, LDiff.jar. 
 
 LDiff.jar is a command-line tool that allows one to compute the logical difference Diff(O1, O2) between two ontologies O1 and O2. The input are O1, O2 and a path specifying the location where you want the output to be saved; see the following example.
 
