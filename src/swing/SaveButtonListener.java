@@ -17,7 +17,7 @@ import org.semanticweb.owlapi.io.OWLXMLOntologyFormat;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import converter.BackConverter;
+import convertion.BackConverter;
 import formula.Formula;
 
 public class SaveButtonListener implements ActionListener {

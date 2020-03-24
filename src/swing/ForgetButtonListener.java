@@ -17,7 +17,7 @@ import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import concepts.AtomicConcept;
-import converter.Converter;
+import convertion.Converter;
 import forgetting.Fame;
 import formula.Formula;
 import roles.AtomicRole;

@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package converter;
+package convertion;
 
 import concepts.AtomicConcept;
 import concepts.BottomConcept;
+import concepts.ConceptExpression;
 import concepts.TopConcept;
 import connectives.And;
 import connectives.Exists;
@@ -28,19 +29,27 @@ import java.util.Set;
 
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
+import org.semanticweb.owlapi.model.OWLDisjointUnionAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectComplementOf;
 import org.semanticweb.owlapi.model.OWLObjectIntersectionOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
+import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
+import org.semanticweb.owlapi.model.OWLObjectPropertyDomainAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
+import org.semanticweb.owlapi.model.OWLObjectPropertyRangeAxiom;
 import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectUnionOf;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
+import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
+import org.semanticweb.owlapi.model.OWLEquivalentObjectPropertiesAxiom;
+import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLLogicalAxiom;
 
 /**
@@ -48,6 +57,18 @@ import org.semanticweb.owlapi.model.OWLLogicalAxiom;
  * @author Yizheng
  */
 public class Converter {
+	
+	private static int i = 0;
+	private static int j = 0;
+	private static int k = 0;
+	private static int l = 0;
+	private static int m = 0;
+	private static int n = 0;
+	private static int o = 0;
+	private static int p = 0;
+	private static int q = 0;
+	private static int r = 0;
+	private static int s = 0;
 		
 	public AtomicConcept getConceptfromClass(OWLClass owlClass) {
 		return new AtomicConcept(owlClass.getIRI().toString());
@@ -283,10 +304,7 @@ public class Converter {
 			}
 			return converted;
 
-		} 
-		
-	 /*
-		else if (axiom instanceof OWLDisjointUnionAxiom) {
+		} else if (axiom instanceof OWLDisjointUnionAxiom) {
 			OWLDisjointUnionAxiom owlDUA = (OWLDisjointUnionAxiom) axiom;
 			OWLEquivalentClassesAxiom owlECA = owlDUA.getOWLEquivalentClassesAxiom();
 			OWLDisjointClassesAxiom owlDCA = owlDUA.getOWLDisjointClassesAxiom();
@@ -305,9 +323,7 @@ public class Converter {
 			OWLSubClassOfAxiom owlSCOA = owlOPRA.asOWLSubClassOfAxiom();
 			return AxiomConverter(owlSCOA);
 
-		} 
-		
-		else if (axiom instanceof OWLSubObjectPropertyOfAxiom) {
+		} else if (axiom instanceof OWLSubObjectPropertyOfAxiom) {
 			OWLSubObjectPropertyOfAxiom owlSOPOA = (OWLSubObjectPropertyOfAxiom) axiom;
 			Formula converted = new Inclusion(RoleExpressionConverter(owlSOPOA.getSubProperty()),
 					RoleExpressionConverter(owlSOPOA.getSuperProperty()));
@@ -333,7 +349,7 @@ public class Converter {
 			Formula converted = new Inclusion(IndividualConverter(owlOPAA.getSubject()), new Exists(
 					RoleExpressionConverter(owlOPAA.getProperty()), IndividualConverter(owlOPAA.getObject())));
 			return Collections.singletonList(converted);
-		}*/
+		}
 
 		return Collections.emptyList();
 	}
@@ -341,12 +357,14 @@ public class Converter {
 	public List<Formula> AxiomConverter_ShortForm(OWLAxiom axiom) {
 
 		if (axiom instanceof OWLSubClassOfAxiom) {
+			setI(getI() + 1);
 			OWLSubClassOfAxiom owlSCOA = (OWLSubClassOfAxiom) axiom;
 			Formula converted = new Inclusion(ClassExpressionConverter_ShortForm(owlSCOA.getSubClass()),
 					ClassExpressionConverter_ShortForm(owlSCOA.getSuperClass()));
 			return Collections.singletonList(converted);
 
 		} else if (axiom instanceof OWLEquivalentClassesAxiom) {
+			setJ(getJ() + 1);
 			OWLEquivalentClassesAxiom owlECA = (OWLEquivalentClassesAxiom) axiom;
 			Set<OWLSubClassOfAxiom> owlSubClassOfAxioms = owlECA.asOWLSubClassOfAxioms();
 			List<Formula> converted = new ArrayList<>();
@@ -356,6 +374,7 @@ public class Converter {
 			return converted;
 
 		} else if (axiom instanceof OWLDisjointClassesAxiom) {
+			setK(getK() + 1);
 			OWLDisjointClassesAxiom owlDCA = (OWLDisjointClassesAxiom) axiom;
 			Set<OWLSubClassOfAxiom> owlSubClassOfAxioms = owlDCA.asOWLSubClassOfAxioms();
 			List<Formula> converted = new ArrayList<>();
@@ -364,10 +383,8 @@ public class Converter {
 			}
 			return converted;
 
-		} 
-		
-		/*
-		else if (axiom instanceof OWLDisjointUnionAxiom) {
+		} else if (axiom instanceof OWLDisjointUnionAxiom) {
+			setL(getL() + 1);
 			OWLDisjointUnionAxiom owlDUA = (OWLDisjointUnionAxiom) axiom;
 			OWLEquivalentClassesAxiom owlECA = owlDUA.getOWLEquivalentClassesAxiom();
 			OWLDisjointClassesAxiom owlDCA = owlDUA.getOWLDisjointClassesAxiom();
@@ -377,24 +394,26 @@ public class Converter {
 			return converted;
 
 		} else if (axiom instanceof OWLObjectPropertyDomainAxiom) {
+			setM(getM() + 1);
 			OWLObjectPropertyDomainAxiom owlOPDA = (OWLObjectPropertyDomainAxiom) axiom;
 			OWLSubClassOfAxiom owlSCOA = owlOPDA.asOWLSubClassOfAxiom();
 			return AxiomConverter_ShortForm(owlSCOA);
 
 		} else if (axiom instanceof OWLObjectPropertyRangeAxiom) {
+			setN(getN() + 1);
 			OWLObjectPropertyRangeAxiom owlOPRA = (OWLObjectPropertyRangeAxiom) axiom;
 			OWLSubClassOfAxiom owlSCOA = owlOPRA.asOWLSubClassOfAxiom();
 			return AxiomConverter_ShortForm(owlSCOA);
 
-		} 
-		
-		else if (axiom instanceof OWLSubObjectPropertyOfAxiom) {
+		} else if (axiom instanceof OWLSubObjectPropertyOfAxiom) {
+			setO(getO() + 1);
 			OWLSubObjectPropertyOfAxiom owlSOPOA = (OWLSubObjectPropertyOfAxiom) axiom;
 			Formula converted = new Inclusion(RoleExpressionConverter_ShortForm(owlSOPOA.getSubProperty()),
 					RoleExpressionConverter_ShortForm(owlSOPOA.getSuperProperty()));
 			return Collections.singletonList(converted);
 
 		} else if (axiom instanceof OWLEquivalentObjectPropertiesAxiom) {
+			setP(getP() + 1);
 			OWLEquivalentObjectPropertiesAxiom owlEOPA = (OWLEquivalentObjectPropertiesAxiom) axiom;
 			Set<OWLSubObjectPropertyOfAxiom> owlSOPOAs = owlEOPA.asSubObjectPropertyOfAxioms();
 			List<Formula> converted = new ArrayList<>();
@@ -404,18 +423,24 @@ public class Converter {
 			return converted;
 			
 		} else if (axiom instanceof OWLClassAssertionAxiom) {
+			setQ(getQ() + 1);
 			OWLClassAssertionAxiom owlCAA = (OWLClassAssertionAxiom) axiom;
 			Formula converted = new Inclusion(IndividualConverter_ShortForm(owlCAA.getIndividual()),
 					ClassExpressionConverter_ShortForm(owlCAA.getClassExpression()));
 			return Collections.singletonList(converted);
 
 		} else if (axiom instanceof OWLObjectPropertyAssertionAxiom) {
+			setR(getR() + 1);
 			OWLObjectPropertyAssertionAxiom owlOPAA = (OWLObjectPropertyAssertionAxiom) axiom;
 			Formula converted = new Inclusion(IndividualConverter_ShortForm(owlOPAA.getSubject()),
 					new Exists(RoleExpressionConverter_ShortForm(owlOPAA.getProperty()),
 							IndividualConverter_ShortForm(owlOPAA.getObject())));
 			return Collections.singletonList(converted);
-		}*/
+			
+		} else {
+			setS(getS() + 1);
+			//System.out.println("axiom = " + axiom);
+		}
 
 		return Collections.emptyList();
 	}
@@ -546,7 +571,7 @@ public class Converter {
 		return TopRole.getInstance();
 	}
 	
-	/*private ConceptExpression IndividualConverter(OWLIndividual indi) {
+	private ConceptExpression IndividualConverter(OWLIndividual indi) {
 
 		if (indi instanceof OWLNamedIndividual) {
 			OWLNamedIndividual owlIndi = (OWLNamedIndividual) indi;
@@ -566,6 +591,94 @@ public class Converter {
 		}
 
 		return TopConcept.getInstance();
-	}*/
+	}
+
+	public static int getI() {
+		return i;
+	}
+
+	public void setI(int i) {
+		Converter.i = i;
+	}
+
+	public static int getJ() {
+		return j;
+	}
+
+	public void setJ(int j) {
+		Converter.j = j;
+	}
+
+	public static int getL() {
+		return l;
+	}
+
+	public void setL(int l) {
+		Converter.l = l;
+	}
+
+	public static int getM() {
+		return m;
+	}
+
+	public void setM(int m) {
+		Converter.m = m;
+	}
+
+	public static int getK() {
+		return k;
+	}
+
+	public void setK(int k) {
+		Converter.k = k;
+	}
+
+	public static int getN() {
+		return n;
+	}
+
+	public void setN(int n) {
+		Converter.n = n;
+	}
+
+	public static int getO() {
+		return o;
+	}
+
+	public void setO(int o) {
+		Converter.o = o;
+	}
+
+	public static int getP() {
+		return p;
+	}
+
+	public void setP(int p) {
+		Converter.p = p;
+	}
+
+	public static int getQ() {
+		return q;
+	}
+
+	public void setQ(int q) {
+		Converter.q = q;
+	}
+
+	public static int getR() {
+		return r;
+	}
+
+	public void setR(int r) {
+		Converter.r = r;
+	}
+
+	public static int getS() {
+		return s;
+	}
+
+	public void setS(int s) {
+		Converter.s = s;
+	}
 
 }

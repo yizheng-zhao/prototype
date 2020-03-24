@@ -1,11 +1,11 @@
 package forgetting;
 
 import formula.Formula;
-import preprocessing.PreProcessor;
 import roles.AtomicRole;
+import simplification.Simplifier;
 import concepts.AtomicConcept;
-import converter.BackConverter;
-import converter.Converter;
+import convertion.BackConverter;
+import convertion.Converter;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -38,10 +38,12 @@ public class Fame {
 		}
 		
 		Converter ct = new Converter();
-		PreProcessor pp = new PreProcessor();
+		Simplifier pp = new Simplifier();
 		Set<AtomicRole> r_sig = ct.getRolesfromObjectProperties(op_set);
 		Set<AtomicConcept> c_sig = ct.getConceptsfromClasses(c_set);
 		List<Formula> formula_list = pp.getCNF(pp.getSimplifiedForm(pp.getClauses(ct.OntologyConverter(onto))));
+		
+		//System.out.println("formula_list = " + formula_list.get(0));
 		
 		Forgetter ft = new Forgetter();
 		List<Formula> forgetting_solution = ft.Forgetting(r_sig, c_sig, formula_list);
@@ -58,8 +60,10 @@ public class Fame {
 			return formula_list;
 		}
 		
-		PreProcessor pp = new PreProcessor();
+		Simplifier pp = new Simplifier();
 		formula_list = pp.getCNF(pp.getSimplifiedForm(pp.getClauses(formula_list)));
+		
+		//System.out.println("formula_list = " + formula_list.get(0));
 		
 		Forgetter ft = new Forgetter(); 
 		BackConverter bc = new BackConverter();

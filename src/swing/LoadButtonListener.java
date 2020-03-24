@@ -19,7 +19,7 @@ import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import concepts.AtomicConcept;
-import converter.Converter;
+import convertion.Converter;
 import formula.Formula;
 import roles.AtomicRole;
 
@@ -95,6 +95,17 @@ public class LoadButtonListener implements ActionListener {
 				System.out.println("No. of Concept Names: " + ontology.getClassesInSignature().size());
 				System.out.println("No. of Role Names: " + ontology.getObjectPropertiesInSignature().size());
 				System.out.println("No. of Individuals: " + ontology.getIndividualsInSignature().size());
+				System.out.println("No. of OWLSubClassOfAxiom: " + Converter.getI());
+				System.out.println("No. of OWLEquivalentClassesAxiom: " + Converter.getJ());
+				System.out.println("No. of OWLDisjointClassesAxiom: " + Converter.getK());
+				System.out.println("No. of OWLDisjointUnionAxiom: " + Converter.getL());
+				System.out.println("No. of OWLObjectPropertyDomainAxiom" + Converter.getM());
+				System.out.println("No. of OWLObjectPropertyRangeAxiom: " + Converter.getN());
+				System.out.println("No. of OWLSubObjectPropertyOfAxiom: " + Converter.getO());
+				System.out.println("No. of OWLEquivalentObjectPropertiesAxiom: " + Converter.getP());
+				System.out.println("No. of OWLClassAssertionAxiom: " + Converter.getQ());
+				System.out.println("No. of OWLObjectPropertyAssertionAxiom: " + Converter.getR());
+				System.out.println("No. of OtherAxiom: " + Converter.getS());
 				System.out.println("===================================================");
 				//formulaList = bc.toAxiomsList(pp.getCNF(pp.getSimplifiedForm(pp.getClauses(ct.OntologyConverter_ShortForm(ontology)))));
 				formulaList = ct.OntologyConverter_ShortForm(ontology);
