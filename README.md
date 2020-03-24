@@ -3,4 +3,4 @@ In the above, we provide a long version of our submission, namely SIGIR2020_Long
 <b>Usage of the Prototype:</b><br>
 The input to the prototype are an ontology and a set of concept and role names to be forgotten, which must be specified in OWL format. We provide users with a GUI for easy and convenient usage of the prototype. The GUI is situated in the "FameGUI.java" under the "swing" folder, and can be invoked simply by running it there via an Java IDE such as Eclipse. <br><br>
 <b>Test Data:</b><br>
-The above test_data folder contains the 396 ontologies used for evaluation of our prototype. Due to size limitation of GitHub, we partition them into 5 zip files. 
+The above test_data folder contains the 396 ontologies used for the evaluation of our prototype, described in the submission. Due to size limitation of GitHub, we partition them into 5 zip files. 
